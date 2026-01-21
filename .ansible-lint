@@ -10,3 +10,6 @@ exclude_paths:
   - .github/
   - terraform/
   - "*.md"
+
+# CI mode - skip syntax-check that requires vault decryption
+offline: true

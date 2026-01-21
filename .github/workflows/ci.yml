@@ -24,22 +24,16 @@ jobs:
       - name: Install dependencies
         run: uv sync
 
+      - name: Create vault password file
+        run: echo "dummy" > .vault_pass.txt
+
       - name: Run yamllint
         run: uv run yamllint .
 
       - name: Run ansible-lint
         run: uv run ansible-lint
-        continue-on-error: true
-
-      - name: Syntax check - deploy.yml
-        run: uv run ansible-playbook deploy.yml --syntax-check
         env:
-          ANSIBLE_VAULT_PASSWORD: "dummy"
-
-      - name: Syntax check - uninstall.yml
-        run: uv run ansible-playbook uninstall.yml --syntax-check
-        env:
-          ANSIBLE_VAULT_PASSWORD: "dummy"
+          ANSIBLE_VAULT_PASSWORD_FILE: .vault_pass.txt
 
   terraform:
     runs-on: ubuntu-latest
