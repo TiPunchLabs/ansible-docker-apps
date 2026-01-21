@@ -68,6 +68,7 @@ The following applications can be deployed and managed through this project:
 | 🌐**Open WebUI** | Feature-rich web interface for AI/LLM APIs              | v0.7.2  | 8080   | [openwebui.com](https://www.openwebui.com/) |
 | 🐳**Portainer**  | Container management platform for Docker                | 2.33.6  | 9443   | [portainer.io](https://www.portainer.io/) |
 | 🔒**Caddy**      | Fast, multi-platform reverse proxy with auto HTTPS      | alpine  | 80/443 | [caddyserver.com](https://caddyserver.com/) |
+| 🎯**Semaphore**  | Modern UI for Ansible, Terraform and other DevOps tools | latest  | 3000   | [semaphoreui.com](https://semaphoreui.com/) |
 
 ### Current Configuration
 
@@ -78,6 +79,7 @@ deploy_excalidraw: true
 deploy_open_webui: true
 deploy_portainer: true
 deploy_caddy: true
+deploy_semaphore: true
 ```
 
 ## ⚡ Quick Start
@@ -214,6 +216,7 @@ deploy_excalidraw: true
 deploy_open_webui: true
 deploy_portainer: true
 deploy_caddy: true
+deploy_semaphore: true
 ```
 
 ### Customizing Application Settings
@@ -271,6 +274,7 @@ ansible-playbook deploy.yml --tags "open_webui"
 | `open_webui` | Open WebUI interface  | ✅ Active in playbook |
 | `portainer`  | Portainer management  | ✅ Active in playbook |
 | `caddy`      | Caddy reverse proxy   | ✅ Active in playbook |
+| `semaphore`  | Semaphore UI          | ✅ Active in playbook |
 
 ### Verify Deployment
 
@@ -286,6 +290,8 @@ You should see containers named:
 - `excalidraw`
 - `portainer`
 - `caddy-proxy`
+- `semaphore`
+- `semaphore-postgres`
 
 ## 🗑️ Uninstallation
 
@@ -328,6 +334,7 @@ All applications support uninstallation via tags:
 | `open_webui` | Open WebUI interface  |
 | `portainer`  | Portainer management  |
 | `caddy`      | Caddy reverse proxy   |
+| `semaphore`  | Semaphore UI          |
 
 ### Manual Cleanup (Optional)
 
@@ -353,6 +360,7 @@ Once deployed, access your applications through these URLs:
 | 🌐**Open WebUI** | <http://localhost:8080>  | Web interface for AI/LLM |
 | 🎨**Excalidraw** | <http://localhost:8082>  | Collaborative whiteboard |
 | 🐳**Portainer**  | <https://localhost:9443> | Container management     |
+| 🎯**Semaphore**  | <http://localhost:3000>  | Ansible/Terraform UI     |
 
 ### First-Time Setup
 
@@ -385,7 +393,8 @@ ansible-docker-apps/
 │       ├── excalidraw/             # Excalidraw whiteboard
 │       ├── open_webui/             # Open WebUI interface
 │       ├── portainer/              # Portainer container management
-│       └── caddy/                  # Caddy reverse proxy
+│       ├── caddy/                  # Caddy reverse proxy
+│       └── semaphore/              # Semaphore UI for Ansible/Terraform
 │       │
 │       └── Each role contains:
 │           ├── tasks/
