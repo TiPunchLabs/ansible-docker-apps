@@ -1,0 +1,43 @@
+---
+- name: Uninstall local projects
+  hosts: local
+  become: false
+  gather_facts: true
+
+  tasks:
+    - name: Uninstall Excalidraw
+      ansible.builtin.import_role:
+        name: excalidraw
+        tasks_from: uninstall
+      tags:
+        - excalidraw
+
+    - name: Uninstall Open WebUI
+      ansible.builtin.import_role:
+        name: open_webui
+        tasks_from: uninstall
+      tags:
+        - open_webui
+
+    - name: Uninstall Portainer
+      ansible.builtin.import_role:
+        name: portainer
+        tasks_from: uninstall
+      tags:
+        - portainer
+
+    - name: Uninstall Caddy
+      ansible.builtin.import_role:
+        name: caddy
+        tasks_from: uninstall
+      tags:
+        - caddy
+
+    - name: Clean application directory
+      become: true
+      ansible.builtin.file:
+        path: "{{ app_path }}"
+        state: absent
+      tags:
+        - cleanup
+        - clean
