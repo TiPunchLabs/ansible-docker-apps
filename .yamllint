@@ -9,6 +9,10 @@ rules:
     line-length: disable
 
 ignore: |
+  .venv/
+  .env
+  .github/
+  terraform/
   .ansible-lint
   .yamllint
   **/vault/**/*.yml
