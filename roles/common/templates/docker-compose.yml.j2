@@ -1,0 +1,51 @@
+services:
+  {{ common_app_container_name }}:
+    image: {{ common_app_image }}:{{ common_app_version | default('latest') }}
+    container_name: {{ common_app_container_name }}
+    restart: unless-stopped
+{% if common_app_ports is defined %}
+    ports:
+{% for port in common_app_ports %}
+      - "{{ port }}"
+{% endfor %}
+{% endif %}
+{% if common_app_env_file is defined %}
+    env_file:
+      - {{ common_app_env_file }}
+{% endif %}
+{% if common_app_environment is defined %}
+    environment:
+{% for key, value in common_app_environment.items() %}
+      - {{ key }}={{ value }}
+{% endfor %}
+{% endif %}
+{% if common_app_volumes is defined %}
+    volumes:
+{% for volume in common_app_volumes %}
+      - "{{ volume }}"
+{% endfor %}
+{% endif %}
+{% if common_app_extra_hosts is defined %}
+    extra_hosts:
+{% for host in common_app_extra_hosts %}
+      - "{{ host }}"
+{% endfor %}
+{% endif %}
+{% if common_network_mode is defined %}
+    network_mode: host
+{% else %}
+    networks:
+      - {{ app_network }}
+{% endif %}
+{% if common_app_volumes_def is defined %}
+volumes:
+{% for volume in common_app_volumes_def %}
+  {{ volume }}:
+{% endfor %}
+{% endif %}
+
+{% if common_network_mode is not defined %}
+networks:
+  {{ app_network }}:
+    external: true
+{% endif %}

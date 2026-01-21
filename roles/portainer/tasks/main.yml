@@ -1,0 +1,60 @@
+---
+- name: Ensure Portainer app directory exists
+  ansible.builtin.file:
+    path: "{{ portainer_app_path }}"
+    state: directory
+    mode: '0755'
+
+- name: Ensure Portainer data directory exists
+  ansible.builtin.file:
+    path: "{{ portainer_data_path }}"
+    state: directory
+    mode: '0755'
+
+- name: Ensure Portainer certs directory exists
+  ansible.builtin.file:
+    path: "{{ portainer_certs_path }}"
+    state: directory
+    mode: '0700'
+  when: portainer_ssl_enabled | default(true)
+
+- name: Generate self-signed SSL certificate
+  ansible.builtin.command:
+    cmd: >
+      openssl req -x509 -nodes -days 365 -newkey rsa:2048
+      -keyout {{ portainer_certs_path }}/key.pem
+      -out {{ portainer_certs_path }}/cert.pem
+      -subj "/CN=localhost"
+    creates: "{{ portainer_certs_path }}/cert.pem"
+  when: portainer_ssl_enabled | default(true)
+
+- name: Set permissions on SSL files
+  ansible.builtin.file:
+    path: "{{ portainer_certs_path }}/{{ item }}"
+    mode: '0600'
+  loop:
+    - key.pem
+    - cert.pem
+  when: portainer_ssl_enabled | default(true)
+
+- name: Deploy Portainer docker-compose configuration
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: "{{ portainer_app_path }}/docker-compose.yml"
+    mode: '0644'
+
+- name: Start Portainer containers
+  community.docker.docker_compose_v2:
+    project_src: "{{ portainer_app_path }}"
+    state: present
+    pull: missing
+  register: portainer_compose_output
+
+- name: Display deployment summary
+  ansible.builtin.debug:
+    msg:
+      - "🐳 Portainer deployed successfully!"
+      - "Access Portainer UI at:"
+      - "  - HTTPS: https://localhost:{{ portainer_https_port }}"
+      - "  - HTTP:  http://localhost:{{ portainer_http_port }}"
+      - "Agent listening on port {{ portainer_agent_port }}"

@@ -1,0 +1,37 @@
+---
+# Caddy container configuration
+caddy_container_name: caddy-proxy
+caddy_app_path: "{{ app_path }}/caddy"
+caddy_image: caddy
+caddy_version: "alpine"
+
+# Network mode
+caddy_network_mode: host
+
+# Data paths
+caddy_data_path: "{{ caddy_app_path }}/data"
+caddy_config_path: "{{ caddy_app_path }}/config"
+
+# Ports (informational only when using host network mode)
+caddy_http_port: "80"
+caddy_https_port: "443"
+
+# ============================================
+# Reverse proxy backends (non-sensitive)
+# ============================================
+# Local Docker services
+caddy_backend_syncthing_port: "8384"
+caddy_backend_portainer_port: "9000"
+caddy_backend_excalidraw_port: "8082"
+caddy_backend_openwebui_port: "8080"
+caddy_backend_n8n_port: "5678"
+
+# ============================================
+# Reverse proxy backends (sensitive - from vault)
+# ============================================
+# caddy_backend_nas_ip: defined in vault
+# caddy_backend_nas_port: defined in vault
+# caddy_backend_proxmox_ip: defined in vault
+# caddy_backend_proxmox_port: defined in vault
+# caddy_backend_k8s_ip: defined in vault
+# caddy_backend_k8s_port: defined in vault

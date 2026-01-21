@@ -1,0 +1,16 @@
+---
+- name: Include common docker app tasks
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: docker_app
+  vars:
+    common_app_install_path: "{{ excalidraw_app_path }}"
+    common_app_container_name: "{{ excalidraw_container_name }}"
+    common_app_image: "{{ excalidraw_image }}"
+    common_app_version: "{{ excalidraw_version }}"
+    common_app_ports:
+      - "{{ excalidraw_port }}:80"
+    common_app_volumes:
+      - "excalidraw-storage:/opt/excalidraw"
+    common_app_volumes_def:
+      - "excalidraw-storage"

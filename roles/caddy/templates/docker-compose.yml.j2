@@ -1,0 +1,15 @@
+services:
+  {{ caddy_container_name }}:
+    image: {{ caddy_image }}:{{ caddy_version }}
+    container_name: {{ caddy_container_name }}
+    network_mode: {{ caddy_network_mode }}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - {{ caddy_data_path }}:/data
+      - {{ caddy_config_path }}:/config
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "caddy", "validate", "--config", "/etc/caddy/Caddyfile"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

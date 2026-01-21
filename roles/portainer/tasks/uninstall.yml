@@ -1,0 +1,15 @@
+---
+- name: Stop and remove Portainer Docker containers
+  community.docker.docker_compose_v2:
+    project_src: "{{ portainer_app_path }}"
+    state: absent
+  failed_when: false
+
+- name: Display uninstall summary
+  ansible.builtin.debug:
+    msg:
+      - "🐳 Portainer uninstalled successfully!"
+      - "Note: Data and certificates are preserved."
+      - "To remove data, run: rm -rf {{ portainer_data_path }}"
+      - "To remove certs, run: rm -rf {{ portainer_certs_path }}"
+      - "To remove app directory, run: rm -rf {{ portainer_app_path }}"

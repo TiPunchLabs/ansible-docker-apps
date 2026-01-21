@@ -1,0 +1,28 @@
+---
+- name: Ensure app directory exists
+  ansible.builtin.file:
+    path: "{{ common_app_install_path }}"
+    state: directory
+    # owner: "{{ app_user }}"
+    # group: "{{ app_group }}"
+    mode: '0755'
+
+- name: Deploy docker-compose configuration
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: "{{ common_app_install_path }}/docker-compose.yml"
+    # owner: "{{ app_user }}"
+    # group: "{{ app_group }}"
+    mode: '0644'
+
+- name: Manage Docker containers
+  community.docker.docker_compose_v2:
+    project_src: "{{ common_app_install_path }}"
+    state: "{{ common_desired_state | default('present') }}"
+    pull: "{{ common_pull_images | default('missing') }}"
+    recreate: "{{ common_force_recreate | default('auto') }}"
+  register: common_compose_output
+
+# - name: Show deployment result
+#   ansible.builtin.debug:
+#     var: compose_output

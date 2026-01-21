@@ -1,0 +1,76 @@
+# Caddyfile Configuration
+# Managed by Ansible - Do not edit manually
+
+# ============================================
+# Local Docker Services
+# ============================================
+syncthing.local {
+	reverse_proxy 127.0.0.1:{{ caddy_backend_syncthing_port }}
+}
+
+portainer.local {
+	reverse_proxy 127.0.0.1:{{ caddy_backend_portainer_port }}
+}
+
+excalidraw.local {
+	reverse_proxy 127.0.0.1:{{ caddy_backend_excalidraw_port }}
+}
+
+openwebui.local {
+	reverse_proxy 127.0.0.1:{{ caddy_backend_openwebui_port }}
+}
+
+n8n.local {
+	reverse_proxy 127.0.0.1:{{ caddy_backend_n8n_port }}
+}
+
+# ============================================
+# NAS Synology
+# ============================================
+{% if caddy_backend_nas_ip is defined %}
+nas.local {
+	reverse_proxy {{ caddy_backend_nas_ip }}:{{ caddy_backend_nas_port | default('5000') }}
+}
+{% endif %}
+
+# ============================================
+# Proxmox VE
+# ============================================
+{% if caddy_backend_proxmox_ip is defined %}
+proxmox.local {
+	reverse_proxy https://{{ caddy_backend_proxmox_ip }}:{{ caddy_backend_proxmox_port | default('8006') }} {
+		transport http {
+			tls_insecure_skip_verify
+		}
+	}
+}
+{% endif %}
+
+# ============================================
+# Cluster Kubernetes (Vagrant)
+# ============================================
+{% if caddy_backend_k8s_ip is defined %}
+traefik.local {
+	reverse_proxy {{ caddy_backend_k8s_ip }}:{{ caddy_backend_k8s_port | default('30928') }} {
+		header_up Host {host}
+	}
+}
+
+prometheus.local {
+	reverse_proxy {{ caddy_backend_k8s_ip }}:{{ caddy_backend_k8s_port | default('30928') }} {
+		header_up Host {host}
+	}
+}
+
+grafana.local {
+	reverse_proxy {{ caddy_backend_k8s_ip }}:{{ caddy_backend_k8s_port | default('30928') }} {
+		header_up Host {host}
+	}
+}
+
+alertmanager.local {
+	reverse_proxy {{ caddy_backend_k8s_ip }}:{{ caddy_backend_k8s_port | default('30928') }} {
+		header_up Host {host}
+	}
+}
+{% endif %}

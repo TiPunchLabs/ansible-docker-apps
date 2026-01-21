@@ -1,0 +1,20 @@
+---
+portainer_container_name: portainer
+portainer_agent_container_name: portainer_agent
+portainer_app_path: "{{ app_path }}/portainer"
+portainer_image: portainer/portainer-ce
+portainer_agent_image: portainer/agent
+portainer_version: "2.33.6"
+portainer_agent_version: "2.33.6"
+
+# Ports
+portainer_https_port: "9443"
+portainer_http_port: "9000"
+portainer_agent_port: "9001"
+
+# SSL Configuration
+portainer_ssl_enabled: true
+portainer_certs_path: "{{ portainer_app_path }}/certs"
+
+# Data paths
+portainer_data_path: "{{ portainer_app_path }}/data"

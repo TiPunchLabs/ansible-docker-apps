@@ -1,0 +1,35 @@
+---
+# ---
+- name: Ensure app directory exists
+  ansible.builtin.file:
+    path: "{{ open_webui_app_path }}"
+    state: directory
+    # owner: "{{ app_user }}"
+    # group: "{{ app_group }}"
+    mode: '0770'
+
+- name: Deploy environment file
+  ansible.builtin.template:
+    src: .env.j2
+    dest: "{{ open_webui_app_path }}/.env"
+    mode: '0644'
+
+- name: Deploy OpenWebUI using common docker tasks
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: docker_app
+  vars:
+    common_app_install_path: "{{ open_webui_app_path }}"
+    common_app_container_name: "{{ open_webui_container_name }}"
+    common_app_image: "ghcr.io/open-webui/open-webui"
+    common_app_version: "{{ open_webui_version }}"
+    common_app_ports:
+      - "{{ open_webui_port }}:8080"
+    common_app_env_file: ".env"
+    common_app_volumes:
+      - "open-webui-data:/app/backend/data"
+    common_app_volumes_def:
+      - "open-webui-data"
+    common_network_mode: "host"  # Pour accéder à Ollama sur l'hôte
+    common_desired_state: present
+    common_pull_images: missing

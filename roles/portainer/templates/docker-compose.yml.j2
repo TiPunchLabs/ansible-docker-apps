@@ -1,0 +1,36 @@
+services:
+  {{ portainer_container_name }}:
+    image: {{ portainer_image }}:{{ portainer_version }}
+    container_name: {{ portainer_container_name }}
+    restart: unless-stopped
+    ports:
+      - "{{ portainer_https_port }}:9443"
+      - "{{ portainer_http_port }}:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - {{ portainer_data_path }}:/data
+{% if portainer_ssl_enabled | default(true) %}
+      - {{ portainer_certs_path }}:/certs:ro
+    command: >
+      --ssl
+      --sslcert /certs/cert.pem
+      --sslkey /certs/key.pem
+{% endif %}
+    networks:
+      - {{ app_network }}
+
+  {{ portainer_agent_container_name }}:
+    image: {{ portainer_agent_image }}:{{ portainer_agent_version }}
+    container_name: {{ portainer_agent_container_name }}
+    restart: unless-stopped
+    ports:
+      - "{{ portainer_agent_port }}:9001"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/volumes:/var/lib/docker/volumes
+    networks:
+      - {{ app_network }}
+
+networks:
+  {{ app_network }}:
+    external: true

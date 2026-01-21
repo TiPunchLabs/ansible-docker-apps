@@ -1,0 +1,14 @@
+---
+- name: Stop and remove Excalidraw Docker containers
+  community.docker.docker_compose_v2:
+    project_src: "{{ excalidraw_app_path }}"
+    state: absent
+  failed_when: false
+
+- name: Display uninstall summary
+  ansible.builtin.debug:
+    msg:
+      - "🎨 Excalidraw uninstalled successfully!"
+      - "Note: Data volumes are preserved."
+      - "To remove data volumes, run: docker volume rm excalidraw-storage"
+      - "To remove app directory, run: rm -rf {{ excalidraw_app_path }}"
