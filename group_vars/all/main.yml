@@ -10,3 +10,4 @@ deploy_excalidraw: true
 deploy_open_webui: true
 deploy_portainer: true
 deploy_caddy: true
+deploy_semaphore: true

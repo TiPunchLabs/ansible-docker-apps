@@ -1,0 +1,31 @@
+---
+- name: Ensure Semaphore app directory exists
+  ansible.builtin.file:
+    path: "{{ semaphore_app_path }}"
+    state: directory
+    mode: '0755'
+
+- name: Ensure Semaphore data directory exists
+  ansible.builtin.file:
+    path: "{{ semaphore_data_path }}"
+    state: directory
+    mode: '0755'
+
+- name: Deploy Semaphore docker-compose configuration
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: "{{ semaphore_app_path }}/docker-compose.yml"
+    mode: '0644'
+
+- name: Start Semaphore containers
+  community.docker.docker_compose_v2:
+    project_src: "{{ semaphore_app_path }}"
+    state: present
+    pull: missing
+
+- name: Display Semaphore deployment info
+  ansible.builtin.debug:
+    msg:
+      - "Semaphore UI deployed successfully!"
+      - "Access: http://localhost:{{ semaphore_port }}"
+      - "Admin user: {{ semaphore_admin_user }}"

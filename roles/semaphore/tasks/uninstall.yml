@@ -1,0 +1,13 @@
+---
+- name: Stop and remove Semaphore containers
+  community.docker.docker_compose_v2:
+    project_src: "{{ semaphore_app_path }}"
+    state: absent
+  failed_when: false
+
+- name: Display uninstall summary
+  ansible.builtin.debug:
+    msg:
+      - "Semaphore uninstalled successfully!"
+      - "Data preserved in: {{ semaphore_data_path }}"
+      - "To remove data: rm -rf {{ semaphore_app_path }}"

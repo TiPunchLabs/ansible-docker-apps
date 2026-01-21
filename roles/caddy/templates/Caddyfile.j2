@@ -24,6 +24,10 @@ n8n.local {
 	reverse_proxy 127.0.0.1:{{ caddy_backend_n8n_port }}
 }
 
+semaphore.local {
+	reverse_proxy 127.0.0.1:{{ caddy_backend_semaphore_port }}
+}
+
 # ============================================
 # NAS Synology
 # ============================================
