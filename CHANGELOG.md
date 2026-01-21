@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- **Semaphore role** - Modern UI for Ansible, Terraform and other DevOps tools
+  - PostgreSQL database backend with health checks
+  - Docker Compose template with multi-service configuration
+  - Secure credentials stored in Ansible Vault
+  - Caddy reverse proxy integration (semaphore.local)
 - **Caddy role** - Reverse proxy with automatic HTTPS support
   - Docker Compose template with host network mode
   - Caddyfile template with Jinja2 variables
