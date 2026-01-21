@@ -1,0 +1,12 @@
+---
+app_user: "{{ app_user_vault }}"
+app_group: "{{ app_user_vault }}"
+
+app_path: "{{ ansible_facts['env']['HOME'] }}/Workspace/07-local/"
+app_network: local_network
+
+# Applications disponibles
+deploy_excalidraw: true
+deploy_open_webui: true
+deploy_portainer: true
+deploy_caddy: true
