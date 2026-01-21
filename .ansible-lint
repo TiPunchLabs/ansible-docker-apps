@@ -3,3 +3,10 @@
 skip_list:
   - no-changed-when
   - literal-compare
+
+exclude_paths:
+  - .venv/
+  - .env
+  - .github/
+  - terraform/
+  - "*.md"
