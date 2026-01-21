@@ -25,6 +25,7 @@ caddy_backend_portainer_port: "9000"
 caddy_backend_excalidraw_port: "8082"
 caddy_backend_openwebui_port: "8080"
 caddy_backend_n8n_port: "5678"
+caddy_backend_semaphore_port: "3000"
 
 # ============================================
 # Reverse proxy backends (sensitive - from vault)

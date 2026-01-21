@@ -33,6 +33,13 @@
       tags:
         - caddy
 
+    - name: Uninstall Semaphore
+      ansible.builtin.import_role:
+        name: semaphore
+        tasks_from: uninstall
+      tags:
+        - semaphore
+
     - name: Clean application directory
       become: true
       ansible.builtin.file:

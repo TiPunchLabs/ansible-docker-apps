@@ -39,3 +39,8 @@
       when: deploy_caddy | default(false)
       tags:
         - caddy
+
+    - role: semaphore
+      when: deploy_semaphore | default(false)
+      tags:
+        - semaphore

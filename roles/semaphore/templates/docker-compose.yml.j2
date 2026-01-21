@@ -1,0 +1,52 @@
+---
+services:
+  {{ semaphore_postgres_container_name }}:
+    image: {{ semaphore_postgres_image }}:{{ semaphore_postgres_version }}
+    container_name: {{ semaphore_postgres_container_name }}
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: {{ semaphore_db_user }}
+      POSTGRES_PASSWORD: {{ semaphore_db_password }}
+      POSTGRES_DB: {{ semaphore_db_name }}
+    volumes:
+      - semaphore-postgres-data:/var/lib/postgresql/data
+    networks:
+      - {{ app_network }}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U {{ semaphore_db_user }} -d {{ semaphore_db_name }}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  {{ semaphore_container_name }}:
+    image: {{ semaphore_image }}:{{ semaphore_version }}
+    container_name: {{ semaphore_container_name }}
+    restart: unless-stopped
+    depends_on:
+      {{ semaphore_postgres_container_name }}:
+        condition: service_healthy
+    ports:
+      - "{{ semaphore_port }}:3000"
+    environment:
+      SEMAPHORE_DB_DIALECT: {{ semaphore_db_dialect }}
+      SEMAPHORE_DB_HOST: {{ semaphore_db_host }}
+      SEMAPHORE_DB_PORT: {{ semaphore_db_port }}
+      SEMAPHORE_DB_USER: {{ semaphore_db_user }}
+      SEMAPHORE_DB_PASS: {{ semaphore_db_password }}
+      SEMAPHORE_DB: {{ semaphore_db_name }}
+      SEMAPHORE_ADMIN: {{ semaphore_admin_user }}
+      SEMAPHORE_ADMIN_PASSWORD: {{ semaphore_admin_password }}
+      SEMAPHORE_ADMIN_NAME: {{ semaphore_admin_user }}
+      SEMAPHORE_ADMIN_EMAIL: {{ semaphore_admin_email }}
+      SEMAPHORE_ACCESS_KEY_ENCRYPTION: {{ semaphore_access_key_encryption }}
+    volumes:
+      - {{ semaphore_data_path }}:/var/lib/semaphore
+    networks:
+      - {{ app_network }}
+
+volumes:
+  semaphore-postgres-data:
+
+networks:
+  {{ app_network }}:
+    external: true
