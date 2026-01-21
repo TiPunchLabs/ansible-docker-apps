@@ -1,0 +1,13 @@
+[project]
+name = "local-projects"
+version = "0.1.0"
+description = "Automated infrastructure-as-code solution for deploying local development tools using Ansible and Docker"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "ansible>=13.2.0",
+    "ansible-lint>=26.1.0",
+    "docker>=7.1.0",
+    "pre-commit>=4.5.1",
+    "requests>=2.32.5",
+]
