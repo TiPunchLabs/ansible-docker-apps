@@ -120,5 +120,5 @@ repos:
     rev: v2.4.1
     hooks:
       - id: codespell
-        args: ["--skip", ".venv,*.lock,*.json", "--ignore-words-list", "nd,ans"]
+        args: ["--skip", ".venv,*.lock,*.json,CLAUDE.md", "--ignore-words-list", "nd,ans"]
         exclude: (^\.venv/)

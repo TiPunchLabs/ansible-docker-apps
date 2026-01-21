@@ -102,9 +102,9 @@ ansible-playbook deploy.yml
 
 Access your applications:
 
-- Open WebUI: http://localhost:8080
-- Excalidraw: http://localhost:8082
-- Portainer: https://localhost:9443
+- Open WebUI: <http://localhost:8080>
+- Excalidraw: <http://localhost:8082>
+- Portainer: <https://localhost:9443>
 
 For detailed setup instructions, see the [Installation](#-installation) section below.
 
@@ -350,15 +350,15 @@ Once deployed, access your applications through these URLs:
 
 | Application          | URL                    | Description              |
 | -------------------- | ---------------------- | ------------------------ |
-| 🌐**Open WebUI** | http://localhost:8080  | Web interface for AI/LLM |
-| 🎨**Excalidraw** | http://localhost:8082  | Collaborative whiteboard |
-| 🐳**Portainer**  | https://localhost:9443 | Container management     |
+| 🌐**Open WebUI** | <http://localhost:8080>  | Web interface for AI/LLM |
+| 🎨**Excalidraw** | <http://localhost:8082>  | Collaborative whiteboard |
+| 🐳**Portainer**  | <https://localhost:9443> | Container management     |
 
 ### First-Time Setup
 
 **For Open WebUI:**
 
-1. Navigate to http://localhost:8080
+1. Navigate to <http://localhost:8080>
 2. Create your admin account on first visit
 3. Configure your AI/LLM backend in Settings
 4. Start using the interface!
@@ -470,6 +470,7 @@ The project uses [pre-commit](https://pre-commit.com/) to ensure code quality. I
 
 ```bash
 pre-commit install
+pre-commit install --hook-type commit-msg
 ```
 
 ### Code Quality Tools
@@ -486,6 +487,12 @@ All of these run automatically on commit:
 | **🔧 TFLint**                | Lints Terraform configurations        | `*.tf`                      |
 | **🐍 Flake8**                | Python code linter                    | `*.py`                      |
 | **🔐 Vault Check**           | Ensures sensitive files are encrypted | `vault/*`                   |
+| **🔒 Gitleaks**              | Detects hardcoded secrets             | All files                     |
+| **📋 Commitizen**            | Validates conventional commit messages| Commit messages               |
+| **📝 Markdownlint**          | Lints Markdown files                  | `*.md`                      |
+| **🔤 Codespell**             | Detects spelling errors               | All files                     |
+| **✅ Check TOML**            | Validates TOML syntax                 | `*.toml`                    |
+| **✅ Check JSON**            | Validates JSON syntax                 | `*.json`                    |
 | **✂️ Trailing Whitespace** | Removes trailing whitespace           | All files                     |
 | **📄 EOF Fixer**             | Ensures files end with newline        | All files                     |
 
@@ -632,6 +639,7 @@ If you encounter issues not covered here:
    # Docker container logs
    docker logs <container_name>
    ```
+
 2. **Search existing issues:** [GitHub Issues](https://github.com/xgueret/ansible-docker-apps/issues)
 3. **Create a new issue:** Provide details about your environment, error messages, and steps to reproduce
 
@@ -648,11 +656,13 @@ Contributions are **welcome and appreciated!** This project benefits from commun
    git clone https://github.com/YOUR-USERNAME/ansible-docker-apps.git
    cd ansible-docker-apps
    ```
+
 2. **Create a feature branch**
 
    ```bash
    git checkout -b feature/amazing-feature
    ```
+
 3. **Make your changes**
 
    - Add a new application role
@@ -668,6 +678,7 @@ Contributions are **welcome and appreciated!** This project benefits from commun
    # Test deployment
    ansible-playbook deploy.yml --check
    ```
+
 5. **Commit your changes**
 
    ```bash
@@ -722,7 +733,7 @@ Contributions are **welcome and appreciated!** This project benefits from commun
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
-### What this means:
+### What this means
 
 - ✅ Commercial use
 - ✅ Modification
