@@ -1,0 +1,62 @@
+---
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Run yamllint
+        run: uv run yamllint .
+
+      - name: Run ansible-lint
+        run: uv run ansible-lint
+        continue-on-error: true
+
+      - name: Syntax check - deploy.yml
+        run: uv run ansible-playbook deploy.yml --syntax-check
+        env:
+          ANSIBLE_VAULT_PASSWORD: "dummy"
+
+      - name: Syntax check - uninstall.yml
+        run: uv run ansible-playbook uninstall.yml --syntax-check
+        env:
+          ANSIBLE_VAULT_PASSWORD: "dummy"
+
+  terraform:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: github
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Format Check
+        run: terraform fmt -check
+
+      - name: Terraform Init
+        run: terraform init -backend=false
+
+      - name: Terraform Validate
+        run: terraform validate
