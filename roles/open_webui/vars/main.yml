@@ -1,4 +1,6 @@
 ---
+open_webui_image: ghcr.io/open-webui/open-webui
+# renovate: datasource=docker depName=ghcr.io/open-webui/open-webui
 open_webui_version: "v0.7.2"
 open_webui_container_name: "open-webui"
 open_webui_app_path: "{{ app_path }}/openWebUI"

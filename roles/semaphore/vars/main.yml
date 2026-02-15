@@ -1,7 +1,8 @@
 ---
 semaphore_container_name: semaphore
 semaphore_image: semaphoreui/semaphore
-semaphore_version: latest
+# renovate: datasource=docker depName=semaphoreui/semaphore
+semaphore_version: "v2.17.2"
 semaphore_port: 3000
 semaphore_app_path: "{{ app_path }}/semaphore"
 semaphore_data_path: "{{ semaphore_app_path }}/data"
@@ -16,6 +17,7 @@ semaphore_db_password: "{{ semaphore_db_password_vault }}"
 
 # PostgreSQL container
 semaphore_postgres_image: postgres
+# renovate: datasource=docker depName=postgres
 semaphore_postgres_version: "16-alpine"
 semaphore_postgres_container_name: semaphore-postgres
 

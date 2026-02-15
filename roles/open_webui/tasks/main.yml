@@ -21,7 +21,7 @@
   vars:
     common_app_install_path: "{{ open_webui_app_path }}"
     common_app_container_name: "{{ open_webui_container_name }}"
-    common_app_image: "ghcr.io/open-webui/open-webui"
+    common_app_image: "{{ open_webui_image }}"
     common_app_version: "{{ open_webui_version }}"
     common_app_ports:
       - "{{ open_webui_port }}:8080"

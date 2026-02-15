@@ -67,8 +67,8 @@ The following applications can be deployed and managed through this project:
 | 🎨**Excalidraw** | Virtual collaborative whiteboard for sketching diagrams | latest  | 8082   | [excalidraw.com](https://excalidraw.com/) |
 | 🌐**Open WebUI** | Feature-rich web interface for AI/LLM APIs              | v0.7.2  | 8080   | [openwebui.com](https://www.openwebui.com/) |
 | 🐳**Portainer**  | Container management platform for Docker                | 2.33.6  | 9443   | [portainer.io](https://www.portainer.io/) |
-| 🔒**Caddy**      | Fast, multi-platform reverse proxy with auto HTTPS      | alpine  | 80/443 | [caddyserver.com](https://caddyserver.com/) |
-| 🎯**Semaphore**  | Modern UI for Ansible, Terraform and other DevOps tools | latest  | 3000   | [semaphoreui.com](https://semaphoreui.com/) |
+| 🔒**Caddy**      | Fast, multi-platform reverse proxy with auto HTTPS      | 2.11-alpine | 80/443 | [caddyserver.com](https://caddyserver.com/) |
+| 🎯**Semaphore**  | Modern UI for Ansible, Terraform and other DevOps tools | v2.17.2 | 3000   | [semaphoreui.com](https://semaphoreui.com/) |
 
 ### Current Configuration
 
@@ -226,15 +226,16 @@ Each application has its own configuration in `roles/<app_name>/vars/main.yml`. 
 **Excalidraw** (`roles/excalidraw/vars/main.yml`):
 
 ```yaml
-excalidraw_version: latest  # Specify version
-excalidraw_port: "8082"     # Web interface port
+excalidraw_version: "latest"  # Specify version (no semver tags available)
+excalidraw_port: "8082"       # Web interface port
 ```
 
 **Open WebUI** (`roles/open_webui/vars/main.yml`):
 
 ```yaml
-open_webui_version: "v0.6.36"  # Specify version
-open_webui_port: 8080          # Web interface port
+open_webui_image: ghcr.io/open-webui/open-webui  # Docker image
+open_webui_version: "v0.7.2"                      # Specify version
+open_webui_port: 8080                              # Web interface port
 ```
 
 ## 🚀 Deployment
@@ -428,6 +429,7 @@ ansible-docker-apps/
 └── 📄 Project Files
     ├── README.md                  # This file
     ├── CLAUDE.md                  # Claude Code context
+    ├── renovate.json              # Renovate dependency update configuration
     └── LICENSE                    # MIT License
 ```
 
@@ -517,6 +519,25 @@ ansible-playbook deploy.yml --syntax-check
 # Check what would change (dry run)
 ansible-playbook deploy.yml --check --diff
 ```
+
+### Dependency Management (Renovate)
+
+This project uses [Renovate](https://docs.renovatebot.com/) to automatically detect new versions of Docker images, GitHub Actions, Python packages, and Terraform providers.
+
+**How it works:**
+
+- Docker image versions in `roles/*/vars/main.yml` are annotated with `# renovate:` comments
+- Renovate scans these annotations and opens Pull Requests when updates are available
+- Configuration is in `renovate.json` at the project root
+
+**Example annotation:**
+
+```yaml
+# renovate: datasource=docker depName=portainer/portainer-ce
+portainer_version: "2.33.6"
+```
+
+> **Note:** Images without semver tags (`excalidraw:latest`) are excluded from automatic updates via package rules.
 
 ### Adding a New Application
 

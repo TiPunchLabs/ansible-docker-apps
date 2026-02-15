@@ -126,7 +126,8 @@ security: correctif de securite
 | Open WebUI  | v0.7.2  | 8080   | Interface web pour LLM         |
 | Excalidraw  | latest  | 8082   | Tableau blanc collaboratif     |
 | Portainer   | 2.33.6  | 9443   | Gestion des conteneurs Docker  |
-| Caddy       | alpine  | 80/443 | Reverse proxy avec auto HTTPS  |
+| Caddy       | 2.11-alpine | 80/443 | Reverse proxy avec auto HTTPS  |
+| Semaphore   | v2.17.2 | 3000   | UI pour Ansible/Terraform      |
 
 ## Fichiers de configuration
 
@@ -136,6 +137,7 @@ security: correctif de securite
 - `.yamllint` : Configuration yamllint
 - `.ansible-lint` : Configuration ansible-lint
 - `.markdownlint.json` : Configuration markdownlint
+- `renovate.json` : Configuration Renovate (gestion automatique des versions)
 
 ## Pre-commit hooks
 
