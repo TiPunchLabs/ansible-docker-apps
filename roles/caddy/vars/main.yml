@@ -3,7 +3,8 @@
 caddy_container_name: caddy-proxy
 caddy_app_path: "{{ app_path }}/caddy"
 caddy_image: caddy
-caddy_version: "alpine"
+# renovate: datasource=docker depName=caddy
+caddy_version: "2.11-alpine"
 
 # Network mode
 caddy_network_mode: host

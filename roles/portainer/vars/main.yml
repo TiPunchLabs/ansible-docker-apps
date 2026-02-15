@@ -4,7 +4,9 @@ portainer_agent_container_name: portainer_agent
 portainer_app_path: "{{ app_path }}/portainer"
 portainer_image: portainer/portainer-ce
 portainer_agent_image: portainer/agent
+# renovate: datasource=docker depName=portainer/portainer-ce
 portainer_version: "2.33.6"
+# renovate: datasource=docker depName=portainer/agent
 portainer_agent_version: "2.33.6"
 
 # Ports

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "labels": ["dependencies"],
+  "schedule": ["every weekend"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["roles/.+/vars/main\\.yml$"],
+      "matchStrings": [
+        "#\\s*renovate:\\s*datasource=(?<datasource>[a-z-]+)\\s+depName=(?<depName>[^\\s]+)\\n[a-z_]+:\\s*\"?(?<currentValue>[^\"\\s]+)\"?"
+      ],
+      "versioningTemplate": "docker"
+    }
+  ],
+  "packageRules": [
+{
+      "matchDatasources": ["docker"],
+      "matchCurrentValue": "latest",
+      "enabled": false,
+      "description": "Skip images pinned to latest until manually versioned"
+    }
+  ]
+}
