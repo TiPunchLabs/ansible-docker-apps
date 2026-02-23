@@ -65,7 +65,7 @@ The following applications can be deployed and managed through this project:
 | Application            | Description                                             | Version | Port   | Official Site                             |
 | ---------------------- | ------------------------------------------------------- | ------- | ------ | ----------------------------------------- |
 | 🎨**Excalidraw** | Virtual collaborative whiteboard for sketching diagrams | latest  | 8082   | [excalidraw.com](https://excalidraw.com/) |
-| 🌐**Open WebUI** | Feature-rich web interface for AI/LLM APIs              | v0.7.2  | 8080   | [openwebui.com](https://www.openwebui.com/) |
+| 🌐**Open WebUI** | Feature-rich web interface for AI/LLM APIs              | v0.8.3  | 8080   | [openwebui.com](https://www.openwebui.com/) |
 | 🐳**Portainer**  | Container management platform for Docker                | 2.33.6  | 9443   | [portainer.io](https://www.portainer.io/) |
 | 🔒**Caddy**      | Fast, multi-platform reverse proxy with auto HTTPS      | 2.11-alpine | 80/443 | [caddyserver.com](https://caddyserver.com/) |
 | 🎯**Semaphore**  | Modern UI for Ansible, Terraform and other DevOps tools | v2.17.2 | 3000   | [semaphoreui.com](https://semaphoreui.com/) |
