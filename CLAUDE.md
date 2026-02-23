@@ -123,7 +123,7 @@ security: correctif de securite
 
 | Application | Version | Port   | Description                    |
 |-------------|---------|--------|--------------------------------|
-| Open WebUI  | v0.7.2  | 8080   | Interface web pour LLM         |
+| Open WebUI  | v0.8.3  | 8080   | Interface web pour LLM         |
 | Excalidraw  | latest  | 8082   | Tableau blanc collaboratif     |
 | Portainer   | 2.33.6  | 9443   | Gestion des conteneurs Docker  |
 | Caddy       | 2.11-alpine | 80/443 | Reverse proxy avec auto HTTPS  |
