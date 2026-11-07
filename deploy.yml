@@ -30,11 +30,6 @@
       tags:
         - open_webui
 
-    - role: portainer
-      when: deploy_portainer | default(false)
-      tags:
-        - portainer
-
     - role: caddy
       when: deploy_caddy | default(false)
       tags:

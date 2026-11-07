@@ -53,6 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- **Portainer role** - deploy/uninstall entries, `deploy_portainer` and the `portainer.local` Caddy route (Portainer is no longer used)
 - Deprecated roles (homer, ollama, planka, postgres)
 - Orphan configuration files for removed roles
 - `requirements.txt` (replaced by `pyproject.toml`)

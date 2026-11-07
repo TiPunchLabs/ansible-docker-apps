@@ -8,6 +8,5 @@ app_network: local_network
 # Applications disponibles
 deploy_excalidraw: true
 deploy_open_webui: true
-deploy_portainer: true
 deploy_caddy: true
 deploy_semaphore: false

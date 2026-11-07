@@ -6,7 +6,7 @@ Ce fichier fournit le contexte necessaire pour travailler sur ce projet.
 
 **ansible-docker-apps** est une solution d'Infrastructure as Code pour deployer des applications auto-hebergees via Docker. Le projet utilise Ansible comme orchestrateur pour gerer le cycle de vie des conteneurs (deploiement, configuration, desinstallation).
 
-**Objectif** : Simplifier le deploiement d'applications conteneurisees (Open WebUI, Excalidraw, Portainer, Caddy) avec une approche declarative et reproductible.
+**Objectif** : Simplifier le deploiement d'applications conteneurisees (Open WebUI, Excalidraw, Caddy) avec une approche declarative et reproductible.
 
 ## Stack technique
 
@@ -32,7 +32,6 @@ ansible-docker-apps/
 │   ├── common/             # Taches partagees
 │   ├── excalidraw/         # Application Excalidraw
 │   ├── open_webui/         # Interface Open WebUI
-│   ├── portainer/          # Gestion des conteneurs
 │   └── caddy/              # Reverse proxy
 ├── docs/                   # Documentation
 ├── terraform/              # Terraform pour GitHub
@@ -125,7 +124,6 @@ security: correctif de securite
 |-------------|---------|--------|--------------------------------|
 | Open WebUI  | v0.8.3  | 8080   | Interface web pour LLM         |
 | Excalidraw  | latest  | 8082   | Tableau blanc collaboratif     |
-| Portainer   | 2.33.6  | 9443   | Gestion des conteneurs Docker  |
 | Caddy       | 2.11-alpine | 80/443 | Reverse proxy avec auto HTTPS  |
 | Semaphore   | v2.17.2 | 3000   | UI pour Ansible/Terraform      |
 

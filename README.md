@@ -66,7 +66,6 @@ The following applications can be deployed and managed through this project:
 | ---------------------- | ------------------------------------------------------- | ------- | ------ | ----------------------------------------- |
 | 🎨**Excalidraw** | Virtual collaborative whiteboard for sketching diagrams | latest  | 8082   | [excalidraw.com](https://excalidraw.com/) |
 | 🌐**Open WebUI** | Feature-rich web interface for AI/LLM APIs              | v0.8.3  | 8080   | [openwebui.com](https://www.openwebui.com/) |
-| 🐳**Portainer**  | Container management platform for Docker                | 2.33.6  | 9443   | [portainer.io](https://www.portainer.io/) |
 | 🔒**Caddy**      | Fast, multi-platform reverse proxy with auto HTTPS      | 2.11-alpine | 80/443 | [caddyserver.com](https://caddyserver.com/) |
 | 🎯**Semaphore**  | Modern UI for Ansible, Terraform and other DevOps tools | v2.17.2 | 3000   | [semaphoreui.com](https://semaphoreui.com/) |
 
@@ -77,7 +76,6 @@ By default, the following applications are **enabled** in `group_vars/all/main.y
 ```yaml
 deploy_excalidraw: true
 deploy_open_webui: true
-deploy_portainer: true
 deploy_caddy: true
 deploy_semaphore: true
 ```
@@ -106,7 +104,6 @@ Access your applications:
 
 - Open WebUI: <http://localhost:8080>
 - Excalidraw: <http://localhost:8082>
-- Portainer: <https://localhost:9443>
 
 For detailed setup instructions, see the [Installation](#-installation) section below.
 
@@ -214,7 +211,6 @@ Edit `group_vars/all/main.yml` to control which applications are deployed:
 ```yaml
 deploy_excalidraw: true
 deploy_open_webui: true
-deploy_portainer: true
 deploy_caddy: true
 deploy_semaphore: true
 ```
@@ -273,7 +269,6 @@ ansible-playbook deploy.yml --tags "open_webui"
 | ------------ | --------------------- | -------------------- |
 | `excalidraw` | Excalidraw whiteboard | ✅ Active in playbook |
 | `open_webui` | Open WebUI interface  | ✅ Active in playbook |
-| `portainer`  | Portainer management  | ✅ Active in playbook |
 | `caddy`      | Caddy reverse proxy   | ✅ Active in playbook |
 | `semaphore`  | Semaphore UI          | ✅ Active in playbook |
 
@@ -289,7 +284,6 @@ You should see containers named:
 
 - `open-webui`
 - `excalidraw`
-- `portainer`
 - `caddy-proxy`
 - `semaphore`
 - `semaphore-postgres`
@@ -333,7 +327,6 @@ All applications support uninstallation via tags:
 | ------------ | --------------------- |
 | `excalidraw` | Excalidraw whiteboard |
 | `open_webui` | Open WebUI interface  |
-| `portainer`  | Portainer management  |
 | `caddy`      | Caddy reverse proxy   |
 | `semaphore`  | Semaphore UI          |
 
@@ -360,7 +353,6 @@ Once deployed, access your applications through these URLs:
 | -------------------- | ---------------------- | ------------------------ |
 | 🌐**Open WebUI** | <http://localhost:8080>  | Web interface for AI/LLM |
 | 🎨**Excalidraw** | <http://localhost:8082>  | Collaborative whiteboard |
-| 🐳**Portainer**  | <https://localhost:9443> | Container management     |
 | 🎯**Semaphore**  | <http://localhost:3000>  | Ansible/Terraform UI     |
 
 ### First-Time Setup
@@ -393,7 +385,6 @@ ansible-docker-apps/
 │       ├── common/                 # Shared tasks and configurations
 │       ├── excalidraw/             # Excalidraw whiteboard
 │       ├── open_webui/             # Open WebUI interface
-│       ├── portainer/              # Portainer container management
 │       ├── caddy/                  # Caddy reverse proxy
 │       └── semaphore/              # Semaphore UI for Ansible/Terraform
 │       │
@@ -533,8 +524,8 @@ This project uses [Renovate](https://docs.renovatebot.com/) to automatically det
 **Example annotation:**
 
 ```yaml
-# renovate: datasource=docker depName=portainer/portainer-ce
-portainer_version: "2.33.6"
+# renovate: datasource=docker depName=semaphoreui/semaphore
+semaphore_version: "v2.17.2"
 ```
 
 > **Note:** Images without semver tags (`excalidraw:latest`) are excluded from automatic updates via package rules.

@@ -19,13 +19,6 @@
       tags:
         - open_webui
 
-    - name: Uninstall Portainer
-      ansible.builtin.import_role:
-        name: portainer
-        tasks_from: uninstall
-      tags:
-        - portainer
-
     - name: Uninstall Caddy
       ansible.builtin.import_role:
         name: caddy
