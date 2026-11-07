@@ -26,13 +26,6 @@
       tags:
         - portainer
 
-    - name: Uninstall Caddy
-      ansible.builtin.import_role:
-        name: caddy
-        tasks_from: uninstall
-      tags:
-        - caddy
-
     - name: Uninstall Semaphore
       ansible.builtin.import_role:
         name: semaphore
