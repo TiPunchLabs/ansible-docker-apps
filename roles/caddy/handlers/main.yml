@@ -1,6 +1,0 @@
----
-- name: Reload Caddy
-  community.docker.docker_compose_v2:
-    project_src: "{{ caddy_app_path }}"
-    state: restarted
-  failed_when: false

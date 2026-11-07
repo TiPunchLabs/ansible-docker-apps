@@ -67,7 +67,6 @@ The following applications can be deployed and managed through this project:
 | 🎨**Excalidraw** | Virtual collaborative whiteboard for sketching diagrams | latest  | 8082   | [excalidraw.com](https://excalidraw.com/) |
 | 🌐**Open WebUI** | Feature-rich web interface for AI/LLM APIs              | v0.8.3  | 8080   | [openwebui.com](https://www.openwebui.com/) |
 | 🐳**Portainer**  | Container management platform for Docker                | 2.33.6  | 9443   | [portainer.io](https://www.portainer.io/) |
-| 🔒**Caddy**      | Fast, multi-platform reverse proxy with auto HTTPS      | 2.11-alpine | 80/443 | [caddyserver.com](https://caddyserver.com/) |
 | 🎯**Semaphore**  | Modern UI for Ansible, Terraform and other DevOps tools | v2.17.2 | 3000   | [semaphoreui.com](https://semaphoreui.com/) |
 
 ### Current Configuration
@@ -78,7 +77,6 @@ By default, the following applications are **enabled** in `group_vars/all/main.y
 deploy_excalidraw: true
 deploy_open_webui: true
 deploy_portainer: true
-deploy_caddy: true
 deploy_semaphore: true
 ```
 
@@ -215,7 +213,6 @@ Edit `group_vars/all/main.yml` to control which applications are deployed:
 deploy_excalidraw: true
 deploy_open_webui: true
 deploy_portainer: true
-deploy_caddy: true
 deploy_semaphore: true
 ```
 
@@ -274,7 +271,6 @@ ansible-playbook deploy.yml --tags "open_webui"
 | `excalidraw` | Excalidraw whiteboard | ✅ Active in playbook |
 | `open_webui` | Open WebUI interface  | ✅ Active in playbook |
 | `portainer`  | Portainer management  | ✅ Active in playbook |
-| `caddy`      | Caddy reverse proxy   | ✅ Active in playbook |
 | `semaphore`  | Semaphore UI          | ✅ Active in playbook |
 
 ### Verify Deployment
@@ -290,7 +286,6 @@ You should see containers named:
 - `open-webui`
 - `excalidraw`
 - `portainer`
-- `caddy-proxy`
 - `semaphore`
 - `semaphore-postgres`
 
@@ -334,7 +329,6 @@ All applications support uninstallation via tags:
 | `excalidraw` | Excalidraw whiteboard |
 | `open_webui` | Open WebUI interface  |
 | `portainer`  | Portainer management  |
-| `caddy`      | Caddy reverse proxy   |
 | `semaphore`  | Semaphore UI          |
 
 ### Manual Cleanup (Optional)
@@ -394,7 +388,6 @@ ansible-docker-apps/
 │       ├── excalidraw/             # Excalidraw whiteboard
 │       ├── open_webui/             # Open WebUI interface
 │       ├── portainer/              # Portainer container management
-│       ├── caddy/                  # Caddy reverse proxy
 │       └── semaphore/              # Semaphore UI for Ansible/Terraform
 │       │
 │       └── Each role contains:

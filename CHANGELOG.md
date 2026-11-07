@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Removed
+
+- **Caddy role** - The laptop reverse proxy is no longer deployed. Its role,
+  `deploy_caddy` flag, encrypted `group_vars/all/vault/caddy.yml` and playbook
+  entries are removed. Reverse proxying and internal TLS belong to the homelab.
+
 ### Added
 
 - **Semaphore role** - Modern UI for Ansible, Terraform and other DevOps tools
